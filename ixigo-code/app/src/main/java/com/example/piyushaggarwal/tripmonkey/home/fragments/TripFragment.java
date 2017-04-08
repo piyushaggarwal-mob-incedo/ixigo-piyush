@@ -3,6 +3,8 @@ package com.example.piyushaggarwal.tripmonkey.home.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +20,7 @@ import com.example.networkrequestlib.ApiRequestClass;
 import com.example.networkrequestlib.interfaces.VolleyResponseListener;
 import com.example.networkrequestlib.models.AutoCompleteCity;
 import com.example.piyushaggarwal.tripmonkey.R;
+import com.example.piyushaggarwal.tripmonkey.adapter.TripListAdapter;
 import com.example.piyushaggarwal.tripmonkey.configuration.UriBuilder;
 import com.example.piyushaggarwal.tripmonkey.core.AbstractBaseFragment;
 import com.example.piyushaggarwal.tripmonkey.helper.TripFragmentHelper;
@@ -29,12 +32,13 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
     TripFragmentHelper tripFragmentHelper;
     AutoCompleteTextView sourceAutoComplete, destinationAutoComplete;
     TextWatcher textWatcher;
-    AutoCompleteCity[] customers;
+    AutoCompleteCity[] sourceDestinationList;
     ArrayAdapter autoCompleteAdapter;
     String[] cityList;
     View.OnClickListener setRouteClickListener;
     Button setRouteBtn;
     RecyclerView cityRecyclerView;
+    TripListAdapter tripListAdapter;
 
     public TripFragment() {
         // Required empty public constructor
@@ -65,6 +69,18 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
         setRouteBtn.setOnClickListener(setRouteClickListener);
         sourceAutoComplete.addTextChangedListener(textWatcher);
         destinationAutoComplete.addTextChangedListener(textWatcher);
+        requestdata("de");
+
+
+    }
+
+    public void populateDataOnScreen() {
+        tripListAdapter = new TripListAdapter(sourceDestinationList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        cityRecyclerView.setLayoutManager(mLayoutManager);
+        cityRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        cityRecyclerView.setAdapter(tripListAdapter);
+        tripListAdapter.notifyDataSetChanged();
     }
 
     public void initListeners() {
@@ -72,7 +88,7 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
         setRouteClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                populateDataOnScreen();
             }
         };
 
@@ -104,14 +120,15 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
         switch (requestCode) {
             case 1:
                 if (!response.equals("{}")) {
-                    customers = new Gson().fromJson(response, AutoCompleteCity[].class);
-                    cityList = new String[customers.length];
-                    for (int i = 0; i < customers.length; i++)
-                        cityList[i] = (customers[i].getText());
+                    sourceDestinationList = new Gson().fromJson(response, AutoCompleteCity[].class);
+                    cityList = new String[sourceDestinationList.length];
+                    for (int i = 0; i < sourceDestinationList.length; i++)
+                        cityList[i] = (sourceDestinationList[i].getText());
                     autoCompleteAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, cityList);
                     sourceAutoComplete.setAdapter(autoCompleteAdapter);
                     destinationAutoComplete.setAdapter(autoCompleteAdapter);
                     autoCompleteAdapter.notifyDataSetChanged();
+                    populateDataOnScreen();
                 }
                 break;
             default:

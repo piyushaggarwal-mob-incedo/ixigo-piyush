@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.core.AbstractBaseActivity;
-import com.example.piyushaggarwal.tripmonkey.home.activity.fragments.TripFragment;
+import com.example.piyushaggarwal.tripmonkey.home.fragments.TripFragment;
 
 public class HomeActivity extends AbstractBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
