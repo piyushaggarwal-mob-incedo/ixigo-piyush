@@ -29,13 +29,14 @@ public class TripFragmentOne extends AbstractBaseFragment implements VolleyRespo
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(), AutoCompleteModel.class, 1);
+
         return inflater.inflate(R.layout.fragment_trip_fragment_one, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(), AutoCompleteModel.class, 1);
     }
 
     @Override
