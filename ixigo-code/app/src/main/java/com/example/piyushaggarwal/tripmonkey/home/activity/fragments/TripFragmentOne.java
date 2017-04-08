@@ -3,18 +3,21 @@ package com.example.piyushaggarwal.tripmonkey.home.activity.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.networkrequestlib.ApiRequestClass;
 import com.example.networkrequestlib.interfaces.VolleyResponseListener;
+import com.example.piyushaggarwal.tripmonkey.IBasePresenter;
+import com.example.piyushaggarwal.tripmonkey.IBaseView;
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.configuration.UriBuilder;
+import com.example.piyushaggarwal.tripmonkey.core.AbstractBaseFragment;
 import com.example.piyushaggarwal.tripmonkey.models.AutoCompleteModel;
 
-public class TripFragmentOne extends Fragment implements VolleyResponseListener {
+public class TripFragmentOne extends AbstractBaseFragment implements VolleyResponseListener, IBasePresenter, IBaseView {
 
 
     public TripFragmentOne() {
@@ -37,11 +40,26 @@ public class TripFragmentOne extends Fragment implements VolleyResponseListener 
 
     @Override
     public <T> void onVolleySuccessResult(T modelResponse) {
-
+        Toast.makeText(getActivity(), modelResponse.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onVolleyErrorResult(String errorMessage) {
+        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void requestData() {
+
+    }
+
+    @Override
+    public void showLoader() {
+
+    }
+
+    @Override
+    public void hideLoader() {
 
     }
 }
