@@ -10,14 +10,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
 
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.core.AbstractBaseActivity;
+import com.example.piyushaggarwal.tripmonkey.home.fragments.FilterFragment;
+import com.example.piyushaggarwal.tripmonkey.home.fragments.TimeLineFragment;
 import com.example.piyushaggarwal.tripmonkey.home.fragments.TripFragment;
 
 public class HomeActivity extends AbstractBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +36,20 @@ public class HomeActivity extends AbstractBaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setBackgroundColor(Color.parseColor("#452544"));
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFragmentToContainer(new TimeLineFragment());
+            }
+        });
 
         //Adding Fragment to The Activity
         addFragmentToContainer(new TripFragment());
@@ -66,7 +80,8 @@ public class HomeActivity extends AbstractBaseActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
+        if (id == R.id.action_filter) {
+            addFragmentToContainer(new FilterFragment());
             return true;
         }
 

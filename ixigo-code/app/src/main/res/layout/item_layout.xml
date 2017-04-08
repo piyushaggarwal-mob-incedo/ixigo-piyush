@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
+    android:id="@+id/itemContainer"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -33,8 +34,8 @@
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/cityFloat"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"

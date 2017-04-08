@@ -70,12 +70,10 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
         sourceAutoComplete.addTextChangedListener(textWatcher);
         destinationAutoComplete.addTextChangedListener(textWatcher);
         requestdata("de");
-
-
     }
 
     public void populateDataOnScreen() {
-        tripListAdapter = new TripListAdapter(sourceDestinationList);
+        tripListAdapter = new TripListAdapter(sourceDestinationList, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         cityRecyclerView.setLayoutManager(mLayoutManager);
         cityRecyclerView.setItemAnimator(new DefaultItemAnimator());

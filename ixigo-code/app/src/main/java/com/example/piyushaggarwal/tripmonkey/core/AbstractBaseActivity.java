@@ -15,7 +15,10 @@ public class AbstractBaseActivity extends AppCompatActivity {
     public void addFragmentToContainer(Fragment currentFragment) {
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
+        //fragmentTransaction.setCustomAnimations(R.animator.slide_in_up, R.animator.);
+
         fragmentTransaction.add(R.id.fragment_container, currentFragment, "TripFragment");
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }
