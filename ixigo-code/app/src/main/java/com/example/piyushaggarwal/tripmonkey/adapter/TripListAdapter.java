@@ -37,11 +37,12 @@ public class TripListAdapter extends RecyclerView.Adapter<TripViewHolder> {
         if (position % 2 == 0) {
             holder.getTextView().setTextColor(Color.GREEN);
             holder.getCityFloat().setBackgroundTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.colorPrimary)));
+            holder.getFloatText().setText("A");
         }
         if (position % 3 == 0) {
             holder.getTextView().setTextColor(Color.RED);
             holder.getCityFloat().setBackgroundTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.gogreen)));
-
+            holder.getFloatText().setText("R");
         }
 
         holder.getLinearLayout().setOnClickListener(new View.OnClickListener() {

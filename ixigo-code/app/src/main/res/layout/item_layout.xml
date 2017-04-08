@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
-    android:id="@+id/itemContainer"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -32,17 +32,33 @@
                 android:textColor="#4BAE4F"
                 android:textSize="16dp" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/cityFloat"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
-                android:elevation="-12dp" />
+                android:elevation="-12dp">
+
+                <TextView
+                    android:id="@+id/floatText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="@android:string/ok"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/cityFloat"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+            </FrameLayout>
+
 
         </RelativeLayout>
 
