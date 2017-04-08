@@ -1,7 +1,5 @@
 package com.example.piyushaggarwal.tripmonkey.home.activity.activity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,11 +32,7 @@ public class HomeActivity extends AbstractBaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        TripFragmentOne tripFragmentOne = new TripFragmentOne();
-        fragmentTransaction.add(R.id.fragment_container, tripFragmentOne, "TripFragmentOne");
-        fragmentTransaction.commit();
+        addFragmentToContainer(new TripFragmentOne());
     }
 
     @Override
