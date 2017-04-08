@@ -13,7 +13,7 @@ public class UriBuilder {
     public String getAutoCompleteCity() {
         Uri.Builder builder = new Uri.Builder();
 
-        builder.scheme("https")
+        builder.scheme("http")
                 .authority(Constants.baseUrl)
                 .appendPath("action")
                 .appendPath("content")

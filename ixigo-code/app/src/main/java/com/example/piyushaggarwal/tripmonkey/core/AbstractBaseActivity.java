@@ -13,7 +13,6 @@ public class AbstractBaseActivity extends AppCompatActivity {
     FragmentTransaction fragmentTransaction;
 
     public void addFragmentToContainer(Fragment currentFragment) {
-
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, currentFragment, "TripFragmentOne");

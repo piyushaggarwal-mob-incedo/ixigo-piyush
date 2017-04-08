@@ -16,6 +16,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.example.networkrequestlib.interfaces.VolleyResponseListener;
+import com.example.networkrequestlib.models.AutoCompleteModel;
 import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
@@ -35,12 +36,24 @@ public class ApiRequestClass {
      * @param modelType
      * @param <T>
      */
-    public static <T> void apiRequest(final VolleyResponseListener responseListener, Context senderContext, final String requestApi, final Class<T> modelType) {
+
+    static ApiRequestClass apiRequestClass;
+
+    public static ApiRequestClass getInstance() {
+        return apiRequestClass == null ? apiRequestClass = new ApiRequestClass() : apiRequestClass;
+    }
+
+    public <T> void apiRequest(final VolleyResponseListener responseListener, Context senderContext, final String requestApi, final Class<T> modelType, final int requestCode) {
 
         StringRequest strGetReq = new StringRequest(Request.Method.GET, requestApi, new Response.Listener<String>() {
             public void onResponse(String response) {
                 Log.d(TAG, response.toString());
-                responseListener.onVolleySuccessResult(new Gson().fromJson(response, modelType));
+                if (requestCode == 1) {
+                    responseListener.onVolleySuccessResult(new Gson().fromJson(response, AutoCompleteModel[].class));
+                } else {
+                    responseListener.onVolleySuccessResult(new Gson().fromJson(response, modelType));
+                }
+
             }
         }, new Response.ErrorListener() {
 
@@ -83,7 +96,7 @@ public class ApiRequestClass {
         RequestController.getInstance(senderContext).addToRequestQueue(strGetReq, modelType.getName());
     }
 
-    public static String checkCache(String checkUrl, Context context) {
+    public String checkCache(String checkUrl, Context context) {
         Cache cache = RequestController.getInstance(context).getRequestQueue().getCache();
         Cache.Entry entry = cache.get(checkUrl);
         if (entry != null) {

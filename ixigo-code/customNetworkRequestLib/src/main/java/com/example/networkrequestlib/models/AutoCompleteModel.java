@@ -1,4 +1,4 @@
-package com.example.piyushaggarwal.tripmonkey.models;
+package com.example.networkrequestlib.models;
 
 import java.io.Serializable;
 

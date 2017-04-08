@@ -35,7 +35,7 @@ public class TripFragmentOne extends AbstractBaseFragment implements VolleyRespo
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new ApiRequestClass().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(), AutoCompleteModel.class);
+        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(), AutoCompleteModel.class, 1);
     }
 
     @Override

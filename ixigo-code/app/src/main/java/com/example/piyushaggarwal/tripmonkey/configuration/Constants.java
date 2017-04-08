@@ -5,5 +5,5 @@ package com.example.piyushaggarwal.tripmonkey.configuration;
  */
 
 public interface Constants {
-    public static final String baseUrl = "http://build2.ixigo.com";
+    public static final String baseUrl = "build2.ixigo.com";
 }
