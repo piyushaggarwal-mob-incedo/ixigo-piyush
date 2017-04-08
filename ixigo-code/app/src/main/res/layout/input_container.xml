@@ -33,7 +33,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="3dp"
                 android:layout_marginTop="1dp"
                 android:orientation="horizontal"
                 android:paddingLeft="16dp">
@@ -45,7 +44,7 @@
                     android:gravity="center_vertical"
                     android:text="From"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="#5AFFFFFF" />
+                    android:textColor="#FFF" />
 
                 <AutoCompleteTextView
                     android:id="@+id/autocomplete_source"
@@ -88,10 +87,10 @@
                     android:gravity="center_vertical"
                     android:paddingTop="2dp"
                     android:password="false"
-                    android:text="to"
+                    android:text="To"
                     android:textAlignment="gravity"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="#5AFFFFFF" />
+                    android:textColor="#FFFFFF" />
 
                 <AutoCompleteTextView
                     android:id="@+id/autocomplete_destination"
@@ -140,7 +139,7 @@
                     android:text="date"
                     android:textAlignment="gravity"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="#5AFFFFFF" />
+                    android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/date"
@@ -177,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="8dp"
-                    android:textColor="#fff"
+                    android:textColor="#fffff"
                     android:textSize="14sp" />
 
             </LinearLayout>
