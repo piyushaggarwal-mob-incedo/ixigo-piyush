@@ -32,6 +32,7 @@ public class HomeActivity extends AbstractBaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Adding Fragment to The Activity
         addFragmentToContainer(new TripFragmentOne());
     }
 
