@@ -55,12 +55,12 @@ public class UriBuilder {
                     .appendPath("v3")
                     .appendPath("namedentities")
                     .appendPath("city")
-                    .appendPath("cityid")
+                    .appendPath("503b2a99e4b032e338f15201")
                     .appendPath("categories")
                     .appendQueryParameter("apiKey", URLEncoder.encode("ixicode!2$","UTF-8"))
-                    .appendQueryParameter("type", "b24a96dc08e5ea197a908993545a3010a7cd290e")
-                    .appendQueryParameter("skip", "b24a96dc08e5ea197a908993545a3010a7cd290e")
-                    .appendQueryParameter("limit", "b24a96dc08e5ea197a908993545a3010a7cd290e");
+                    .appendQueryParameter("type", "hotel")
+                    .appendQueryParameter("skip", "1")
+                    .appendQueryParameter("limit", "5");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -80,9 +80,9 @@ public class UriBuilder {
                     .appendPath("widgets")
                     .appendPath("brand")
                     .appendPath("inspire")
-                    .appendQueryParameter("product", "b24a96dc08e5ea197a908993545a3010a7cd290e")
-                    .appendQueryParameter("apiKey", URLEncoder.encode("ixicode!2$","UTF-8"));
-        } catch (UnsupportedEncodingException e) {
+                    .appendQueryParameter("product", "1")
+                    .appendQueryParameter("apiKey","ixicode!2$");
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -90,7 +90,7 @@ public class UriBuilder {
         return myUrl;
     }
 
-    public String getEntityDetailAPIData(String apiKey) {
+    public String getEntityDetailAPIData(String entityID) {
         Uri.Builder builder = new Uri.Builder();
 
         try {
@@ -100,9 +100,10 @@ public class UriBuilder {
                     .appendPath("v3")
                     .appendPath("namedentities")
                     .appendPath("id")
-                    .appendPath("entityId")
-                    .appendQueryParameter("apiKey", URLEncoder.encode("ixicode!2$","UTF-8"));
-        } catch (UnsupportedEncodingException e) {
+                    .appendPath(entityID)
+                    .appendQueryParameter("apiKey","ixicode!2$");
+                   // .appendQueryParameter("apiKey", URLEncoder.encode("ixicode!2$","UTF-8"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -114,6 +115,8 @@ public class UriBuilder {
     public String getA2BAPIData(String apiKey, String originCityId, String destinationCityId) {
         Uri.Builder builder = new Uri.Builder();
 
+        //use xid
+
         try {
             builder.scheme("http")
                     .authority(Constants.baseUrl)
@@ -121,10 +124,10 @@ public class UriBuilder {
                     .appendPath("v2")
                     .appendPath("a2b")
                     .appendPath("modes")
-                    .appendQueryParameter("apiKey", URLEncoder.encode("ixicode!2$","UTF-8"))
-                    .appendQueryParameter("originCityId", "b24a96dc08e5ea197a908993545a3010a7cd290e")
-                    .appendQueryParameter("destinationCityId", "b24a96dc08e5ea197a908993545a3010a7cd290e");
-        } catch (UnsupportedEncodingException e) {
+                    .appendQueryParameter("apiKey","ixicode!2$")
+                    .appendQueryParameter("originCityId", "1065223")
+                    .appendQueryParameter("destinationCityId", "1074271");
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

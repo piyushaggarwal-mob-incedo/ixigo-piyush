@@ -21,8 +21,8 @@ import com.example.networkrequestlib.interfaces.VolleyResponseListener;
 import com.example.networkrequestlib.models.A2BResponseModel;
 import com.example.networkrequestlib.models.APIARREsponseModel;
 import com.example.networkrequestlib.models.AutoCompleteCity;
-import com.example.networkrequestlib.models.CityInterestData;
-import com.example.networkrequestlib.models.EntityDetailData;
+import com.example.networkrequestlib.models.CityInterestesponseModel;
+import com.example.networkrequestlib.models.EntityDetailResponseModel;
 import com.example.networkrequestlib.models.RecommendationAPIResponseModel;
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.adapter.TripListAdapter;
@@ -115,21 +115,27 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
     }
 
     public void requestdata(String inputtext) {
-        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(inputtext), AutoCompleteCity.class, 1);
+        // ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(inputtext), AutoCompleteCity.class, 1);
 
-        System.out.println("URI" + UriBuilder.getInstance().getARData());
-        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getARData(), APIARREsponseModel.class, 2);
+        // System.out.println("URI " + UriBuilder.getInstance().getARData());
+        //  ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getARData(), APIARREsponseModel.class, 2);
 
-        System.out.println("URI" + UriBuilder.getInstance().getCityInterestsAPIData("", "", "", ""));
-        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getCityInterestsAPIData("", "", "", ""), CityInterestData.class, 3);
+        //  System.out.println("URI " + UriBuilder.getInstance().getCityInterestsAPIData("", "", "", ""));
+        //  ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getCityInterestsAPIData("", "", "", ""), CityInterestData.class, 3);
 
-        System.out.println("URI" + UriBuilder.getInstance().getEntityDetailAPIData(""));
-        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getEntityDetailAPIData(""), EntityDetailData.class, 4);
+        //  ApiRequestClass.getInstance().apiRequest(this, getActivity(),"http://build2.ixigo.com/api/v3/namedentities/city/503b2a99e4b032e338f15201/categories?apiKey=ixicode!2$&type=hotel&skip=1&limit=5" , CityInterestData.class, 3);
 
-        System.out.println("URI" + UriBuilder.getInstance().getRecommendedAPIData("", ""));
+        //   System.out.println("URI " + UriBuilder.getInstance().getCityInterestsAPIData("", "", "", ""));
+
+        // http://build2.ixigo.com/api/v3/namedentities/city/503b2a99e4b032e338f15201/categories?apiKey=ixicode!2$&type=hotel&skip=1&limit=5
+
+        //   System.out.println("URI " + UriBuilder.getInstance().getEntityDetailAPIData(""));
+        // ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getEntityDetailAPIData("503b2a99e4b032e338f15201"), EntityDetailResponseModel.class, 4);
+
+      /*  System.out.println("URI " + UriBuilder.getInstance().getRecommendedAPIData("", ""));
         ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getRecommendedAPIData("", ""), RecommendationAPIResponseModel.class, 5);
-
-        System.out.println("URI" + UriBuilder.getInstance().getA2BAPIData("", "", ""));
+*/
+        System.out.println("URI " + UriBuilder.getInstance().getA2BAPIData("", "", ""));
         ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getA2BAPIData("", "", ""), A2BResponseModel.class, 6);
 
     }
@@ -148,6 +154,46 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
                     destinationAutoComplete.setAdapter(autoCompleteAdapter);
                     autoCompleteAdapter.notifyDataSetChanged();
                     populateDataOnScreen();
+                }
+                break;
+            case 2:
+                if (!response.equals("{}")) {
+                    APIARREsponseModel apiarrEsponseModel = new Gson().fromJson(response, APIARREsponseModel.class);
+                    if (sourceDestinationList != null) {
+                        System.out.println("==== API AR Response Model ===" + apiarrEsponseModel.getData().getCity());
+                    }
+                }
+                break;
+            case 3:
+                if (!response.equals("{}")) {
+                    CityInterestesponseModel sourceDestinationList = new Gson().fromJson(response, CityInterestesponseModel.class);
+                    if (sourceDestinationList != null) {
+                        System.out.println("==== City Name ===" + sourceDestinationList.getData().getHotel()[1].getCityName());
+                    }
+                }
+                break;
+            case 4:
+                if (!response.equals("{}")) {
+                    EntityDetailResponseModel entityDetailResponseModel = new Gson().fromJson(response, EntityDetailResponseModel.class);
+                    if (entityDetailResponseModel != null) {
+                        System.out.println("==== Entity Detail Data ===" + entityDetailResponseModel.getData().getName());
+                    }
+                }
+                break;
+            case 5:
+                if (!response.equals("{}")) {
+                    RecommendationAPIResponseModel recommendationAPIResponseModel = new Gson().fromJson(response, RecommendationAPIResponseModel.class);
+                    if (recommendationAPIResponseModel != null) {
+                        System.out.println("==== Recomm Data ===" + recommendationAPIResponseModel.getData().getFlight().get(0).getCountryName());
+                    }
+                }
+                break;
+            case 6:
+                if (!response.equals("{}")) {
+                    A2BResponseModel a2BResponseModel = new Gson().fromJson(response, A2BResponseModel.class);
+                    if (a2BResponseModel != null) {
+                        System.out.println("==== A2B Data ===" + a2BResponseModel.getData().getDestination().getName());
+                    }
                 }
                 break;
             default:
