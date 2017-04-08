@@ -13,9 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.example.piyushaggarwal.tripmonkey.PollutionFragment;
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.core.AbstractBaseActivity;
-import com.example.piyushaggarwal.tripmonkey.home.fragments.FilterFragment;
 import com.example.piyushaggarwal.tripmonkey.home.fragments.TimeLineFragment;
 import com.example.piyushaggarwal.tripmonkey.home.fragments.TripFragment;
 
@@ -23,6 +23,7 @@ public class HomeActivity extends AbstractBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +82,7 @@ public class HomeActivity extends AbstractBaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_filter) {
-            addFragmentToContainer(new FilterFragment());
+            addFragmentToContainer(new PollutionFragment());
             return true;
         }
 
