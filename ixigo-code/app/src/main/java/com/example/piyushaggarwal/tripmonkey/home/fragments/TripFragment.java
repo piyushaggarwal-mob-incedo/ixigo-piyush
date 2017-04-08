@@ -114,8 +114,9 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
         };
     }
 
+
     public void requestdata(String inputtext) {
-        // ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(inputtext), AutoCompleteCity.class, 1);
+        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(inputtext), AutoCompleteCity.class, 1);
 
         // System.out.println("URI " + UriBuilder.getInstance().getARData());
         //  ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getARData(), APIARREsponseModel.class, 2);
