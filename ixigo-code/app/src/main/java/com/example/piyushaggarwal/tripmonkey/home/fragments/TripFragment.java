@@ -18,7 +18,12 @@ import android.widget.Toast;
 
 import com.example.networkrequestlib.ApiRequestClass;
 import com.example.networkrequestlib.interfaces.VolleyResponseListener;
+import com.example.networkrequestlib.models.A2BResponseModel;
+import com.example.networkrequestlib.models.APIARREsponseModel;
 import com.example.networkrequestlib.models.AutoCompleteCity;
+import com.example.networkrequestlib.models.CityInterestData;
+import com.example.networkrequestlib.models.EntityDetailData;
+import com.example.networkrequestlib.models.RecommendationAPIResponseModel;
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.adapter.TripListAdapter;
 import com.example.piyushaggarwal.tripmonkey.configuration.UriBuilder;
@@ -111,6 +116,22 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
 
     public void requestdata(String inputtext) {
         ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(inputtext), AutoCompleteCity.class, 1);
+
+        System.out.println("URI" + UriBuilder.getInstance().getARData());
+        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getARData(), APIARREsponseModel.class, 2);
+
+        System.out.println("URI" + UriBuilder.getInstance().getCityInterestsAPIData("", "", "", ""));
+        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getCityInterestsAPIData("", "", "", ""), CityInterestData.class, 3);
+
+        System.out.println("URI" + UriBuilder.getInstance().getEntityDetailAPIData(""));
+        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getEntityDetailAPIData(""), EntityDetailData.class, 4);
+
+        System.out.println("URI" + UriBuilder.getInstance().getRecommendedAPIData("", ""));
+        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getRecommendedAPIData("", ""), RecommendationAPIResponseModel.class, 5);
+
+        System.out.println("URI" + UriBuilder.getInstance().getA2BAPIData("", "", ""));
+        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getA2BAPIData("", "", ""), A2BResponseModel.class, 6);
+
     }
 
     @Override

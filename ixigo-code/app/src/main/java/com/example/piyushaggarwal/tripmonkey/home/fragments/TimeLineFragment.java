@@ -11,11 +11,7 @@ import android.view.ViewGroup;
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.home.activity.activity.HomeActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TimeLineFragment extends Fragment {
-
 
     public TimeLineFragment() {
         // Required empty public constructor
