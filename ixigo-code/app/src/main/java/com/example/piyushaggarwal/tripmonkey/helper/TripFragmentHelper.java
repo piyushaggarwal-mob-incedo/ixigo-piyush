@@ -2,7 +2,7 @@ package com.example.piyushaggarwal.tripmonkey.helper;
 
 import com.example.piyushaggarwal.tripmonkey.IBasePresenter;
 import com.example.piyushaggarwal.tripmonkey.IBaseView;
-import com.example.piyushaggarwal.tripmonkey.home.activity.fragments.TripFragment;
+import com.example.piyushaggarwal.tripmonkey.home.fragments.TripFragment;
 
 public class TripFragmentHelper implements IBaseView, IBasePresenter {
 

@@ -1,8 +1,9 @@
-package com.example.piyushaggarwal.tripmonkey.home.activity.fragments;
+package com.example.piyushaggarwal.tripmonkey.home.fragments;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
     String[] cityList;
     View.OnClickListener setRouteClickListener;
     Button setRouteBtn;
+    RecyclerView cityRecyclerView;
 
     public TripFragment() {
         // Required empty public constructor
@@ -59,6 +61,7 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
         sourceAutoComplete = (AutoCompleteTextView) mView.findViewById(R.id.autocomplete_source);
         destinationAutoComplete = (AutoCompleteTextView) mView.findViewById(R.id.autocomplete_destination);
         setRouteBtn = (Button) mView.findViewById(R.id.getRoute);
+        cityRecyclerView = (RecyclerView) mView.findViewById(R.id.cityRecyclerView);
         setRouteBtn.setOnClickListener(setRouteClickListener);
         sourceAutoComplete.addTextChangedListener(textWatcher);
         destinationAutoComplete.addTextChangedListener(textWatcher);

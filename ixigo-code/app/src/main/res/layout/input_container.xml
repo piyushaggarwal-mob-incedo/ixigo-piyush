@@ -213,7 +213,6 @@
             android:onClick="hideToolbar"
             android:src="@drawable/ic_expand_less_24dp"
             android:visibility="invisible" />
-
     </RelativeLayout>
 
 </LinearLayout>
