@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.core.AbstractBaseActivity;
-import com.example.piyushaggarwal.tripmonkey.home.activity.fragments.TripFragmentOne;
+import com.example.piyushaggarwal.tripmonkey.home.activity.fragments.TripFragment;
 
 public class HomeActivity extends AbstractBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,7 +33,7 @@ public class HomeActivity extends AbstractBaseActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Adding Fragment to The Activity
-        addFragmentToContainer(new TripFragmentOne());
+        addFragmentToContainer(new TripFragment());
     }
 
     @Override

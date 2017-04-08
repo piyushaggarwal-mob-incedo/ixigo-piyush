@@ -10,7 +10,7 @@ public class UriBuilder {
         return uriBuilder == null ? uriBuilder = new UriBuilder() : uriBuilder;
     }
 
-    public String getAutoCompleteCity() {
+    public String getAutoCompleteCity(String inputText) {
         Uri.Builder builder = new Uri.Builder();
 
         builder.scheme("http")
@@ -22,7 +22,7 @@ public class UriBuilder {
                 .appendPath("content")
                 .appendQueryParameter("searchFor", "tpAutoComplete")
                 .appendQueryParameter("neCategories", "City")
-                .appendQueryParameter("query", "de");
+                .appendQueryParameter("query", inputText);
 
 
         String myUrl = builder.build().toString();

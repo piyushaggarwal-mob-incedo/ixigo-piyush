@@ -1,6 +1,5 @@
 package com.example.networkrequestlib;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -12,16 +11,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.example.networkrequestlib.interfaces.VolleyResponseListener;
-import com.example.networkrequestlib.models.AutoCompleteModel;
-import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class ApiRequestClass {
@@ -48,12 +42,7 @@ public class ApiRequestClass {
         StringRequest strGetReq = new StringRequest(Request.Method.GET, requestApi, new Response.Listener<String>() {
             public void onResponse(String response) {
                 Log.d(TAG, response.toString());
-                if (requestCode == 1) {
-                    responseListener.onVolleySuccessResult(new Gson().fromJson(response, AutoCompleteModel[].class));
-                } else {
-                    responseListener.onVolleySuccessResult(new Gson().fromJson(response, modelType));
-                }
-
+                responseListener.onVolleySuccessResult(response, modelType,requestCode);
             }
         }, new Response.ErrorListener() {
 
@@ -115,42 +104,4 @@ public class ApiRequestClass {
         }
     }
 
-    public void apiRequest(final VolleyResponseListener responseListener, Context senderContext, String requestApi, final Map<String, String> requestParams, String tagReq) {
-
-        final ProgressDialog pDialog = new ProgressDialog(senderContext);
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
-        StringRequest strPostReq = new StringRequest(Request.Method.POST,
-                requestApi, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, response.toString());
-                pDialog.hide();
-                responseListener.onVolleySuccessResult(response);
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                pDialog.hide();
-                responseListener.onVolleyErrorResult(error.getMessage());
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params = requestParams;
-                return params;
-            }
-        };
-
-
-        RequestController.getInstance(senderContext).addToRequestQueue(strPostReq);
-
-    }
 }

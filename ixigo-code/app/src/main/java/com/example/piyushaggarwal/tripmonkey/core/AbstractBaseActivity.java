@@ -15,7 +15,7 @@ public class AbstractBaseActivity extends AppCompatActivity {
     public void addFragmentToContainer(Fragment currentFragment) {
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, currentFragment, "TripFragmentOne");
+        fragmentTransaction.add(R.id.fragment_container, currentFragment, "TripFragment");
         fragmentTransaction.commit();
     }
 }
