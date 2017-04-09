@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.networkrequestlib.models.A2BResponseModel;
-import com.example.networkrequestlib.models.AutoCompleteCity;
 import com.example.networkrequestlib.models.Routes;
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.holders.TripViewHolder;
@@ -48,14 +47,14 @@ public class TripListAdapter extends RecyclerView.Adapter<TripViewHolder> {
             holder.getFastestRoute().setText("Fastest Route");
             holder.getTextView().setTextColor(Color.RED);
             holder.getCityFloat().setBackgroundTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.yellow)));
-            holder.getFloatText().setText("46");
+            holder.getFloatText().setText("73");
             holder.getImageView().setBackgroundResource(R.drawable.plane);
         }
         if (position % 3 == 2) {
             holder.getFastestRoute().setText("Cheapest Route");
             holder.getTextView().setTextColor(Color.GREEN);
             holder.getCityFloat().setBackgroundTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.redcolor)));
-            holder.getFloatText().setText("73");
+            holder.getFloatText().setText("46");
             holder.getImageView().setBackgroundResource(R.drawable.car);
         }
 
