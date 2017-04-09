@@ -1,12 +1,14 @@
 package com.example.networkrequestlib.models;
 
+import java.lang.reflect.Array;
+
 /**
  * Created by romit.srivastava on 4/8/2017.
  */
 
 public class Carriers
 {
-    private int depTime;
+    private String depTime;
 
     private String commaSeparatedDOO;
 
@@ -20,26 +22,26 @@ public class Carriers
 
     private String destinationCode;
 
-    private int tfList;
+    private Array[] tfList;
 
     private String time;
 
-    private int price;
+    private String price;
 
     private String carrierName;
 
-    private int arrTime;
+    private String arrTime;
 
-    private int trainType;
+    private String trainType;
 
     private String daysOfOperation;
 
-    public int getDepTime ()
+    public String getDepTime ()
 {
     return depTime;
 }
 
-    public void setDepTime (int depTime)
+    public void setDepTime (String depTime)
     {
         this.depTime = depTime;
     }
@@ -104,12 +106,12 @@ public class Carriers
         this.destinationCode = destinationCode;
     }
 
-    public int getTfList ()
+    public Array[] getTfList ()
 {
     return tfList;
 }
 
-    public void setTfList (int tfList)
+    public void setTfList (Array[] tfList)
     {
         this.tfList = tfList;
     }
@@ -124,12 +126,12 @@ public class Carriers
         this.time = time;
     }
 
-    public int getPrice ()
+    public String getPrice ()
 {
     return price;
 }
 
-    public void setPrice (int price)
+    public void setPrice (String price)
     {
         this.price = price;
     }
@@ -144,22 +146,22 @@ public class Carriers
         this.carrierName = carrierName;
     }
 
-    public int getArrTime ()
+    public String getArrTime ()
 {
     return arrTime;
 }
 
-    public void setArrTime (int arrTime)
+    public void setArrTime (String arrTime)
     {
         this.arrTime = arrTime;
     }
 
-    public int getTrainType ()
+    public String getTrainType ()
 {
     return trainType;
 }
 
-    public void setTrainType (int trainType)
+    public void setTrainType (String trainType)
     {
         this.trainType = trainType;
     }

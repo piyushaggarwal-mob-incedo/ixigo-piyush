@@ -24,26 +24,36 @@ import com.example.networkrequestlib.models.AutoCompleteCity;
 import com.example.networkrequestlib.models.CityInterestesponseModel;
 import com.example.networkrequestlib.models.EntityDetailResponseModel;
 import com.example.networkrequestlib.models.RecommendationAPIResponseModel;
+import com.example.networkrequestlib.models.Routes;
 import com.example.piyushaggarwal.tripmonkey.R;
 import com.example.piyushaggarwal.tripmonkey.adapter.TripListAdapter;
+import com.example.piyushaggarwal.tripmonkey.adapter.TripListAdapterCity;
 import com.example.piyushaggarwal.tripmonkey.configuration.UriBuilder;
 import com.example.piyushaggarwal.tripmonkey.core.AbstractBaseFragment;
 import com.example.piyushaggarwal.tripmonkey.helper.TripFragmentHelper;
 import com.google.gson.Gson;
+
+import java.util.Arrays;
 
 public class TripFragment extends AbstractBaseFragment implements VolleyResponseListener {
 
     View mView;
     TripFragmentHelper tripFragmentHelper;
     AutoCompleteTextView sourceAutoComplete, destinationAutoComplete;
-    TextWatcher textWatcher;
-    AutoCompleteCity[] sourceDestinationList;
+    TextWatcher textWatcherOne, textWatcherTwo;
+    AutoCompleteCity[] sourceDestinationList, sourceList, destList;
+    A2BResponseModel a2BResponseModelData;
+    Routes[] routesList;
     ArrayAdapter autoCompleteAdapter;
-    String[] cityList;
+    String[] cityList, destCityList;
     View.OnClickListener setRouteClickListener;
     Button setRouteBtn;
     RecyclerView cityRecyclerView;
     TripListAdapter tripListAdapter;
+    TripListAdapterCity tripListAdapterCity;
+    String sourceId, DestinationId;
+    int editTextType;
+    int sourceXID, destinationXID;
 
     public TripFragment() {
         // Required empty public constructor
@@ -72,13 +82,22 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
         setRouteBtn = (Button) mView.findViewById(R.id.getRoute);
         cityRecyclerView = (RecyclerView) mView.findViewById(R.id.cityRecyclerView);
         setRouteBtn.setOnClickListener(setRouteClickListener);
-        sourceAutoComplete.addTextChangedListener(textWatcher);
-        destinationAutoComplete.addTextChangedListener(textWatcher);
-        requestdata("de");
+        sourceAutoComplete.addTextChangedListener(textWatcherOne);
+        destinationAutoComplete.addTextChangedListener(textWatcherTwo);
+        //requestdata(0);
+    }
+
+    public void populateDefaultDataOnScreen() {
+        tripListAdapterCity = new TripListAdapterCity(cityList, getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        cityRecyclerView.setLayoutManager(mLayoutManager);
+        cityRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        cityRecyclerView.setAdapter(tripListAdapterCity);
+        tripListAdapterCity.notifyDataSetChanged();
     }
 
     public void populateDataOnScreen() {
-        tripListAdapter = new TripListAdapter(sourceDestinationList, getActivity());
+        tripListAdapter = new TripListAdapter(a2BResponseModelData, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         cityRecyclerView.setLayoutManager(mLayoutManager);
         cityRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -91,11 +110,21 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
         setRouteClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                populateDataOnScreen();
+                String editTextValueOne = sourceAutoComplete.getText().toString();
+                String editTextValueTwo = destinationAutoComplete.getText().toString();
+                if (editTextValueOne != null || editTextValueTwo != null) {
+                    int sourceId = Arrays.asList(cityList).indexOf(editTextValueOne);
+                    int destinationId = Arrays.asList(destCityList).indexOf(editTextValueTwo);
+                    sourceXID = sourceList[sourceId].getXid();
+                    destinationXID = destList[destinationId].getXid();
+
+                }
+
+                requestdata(5);
             }
         };
 
-        textWatcher = new TextWatcher() {
+        textWatcherTwo = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -104,7 +133,9 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() > 1)
-                    requestdata(s.toString());
+                    //requestEditTextData(s.toString());
+                    ApiRequestClass.getInstance().apiRequest(TripFragment.this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(s.toString()), AutoCompleteCity.class, 8);
+
             }
 
             @Override
@@ -112,11 +143,52 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
 
             }
         };
+
+        textWatcherOne = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 1)
+                    // requestEditTextData(s.toString());
+                    ApiRequestClass.getInstance().apiRequest(TripFragment.this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(s.toString()), AutoCompleteCity.class, 7);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        };
+    }
+
+    public void requestEditTextData(String inputText) {
+        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(inputText), AutoCompleteCity.class, 1);
     }
 
 
-    public void requestdata(String inputtext) {
-        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getAutoCompleteCity(inputtext), AutoCompleteCity.class, 1);
+    public void requestdata(int requestCode) {
+
+        switch (requestCode) {
+            case 0:
+                requestEditTextData("de");
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getA2BAPIData("", Integer.toString(sourceXID), Integer.toString(destinationXID)), A2BResponseModel.class, 6);
+                break;
+            default:
+                break;
+        }
 
         // System.out.println("URI " + UriBuilder.getInstance().getARData());
         //  ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getARData(), APIARREsponseModel.class, 2);
@@ -137,7 +209,6 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
         ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getRecommendedAPIData("", ""), RecommendationAPIResponseModel.class, 5);
 */
         System.out.println("URI " + UriBuilder.getInstance().getA2BAPIData("", "", ""));
-        ApiRequestClass.getInstance().apiRequest(this, getActivity(), UriBuilder.getInstance().getA2BAPIData("", "", ""), A2BResponseModel.class, 6);
 
     }
 
@@ -154,7 +225,8 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
                     sourceAutoComplete.setAdapter(autoCompleteAdapter);
                     destinationAutoComplete.setAdapter(autoCompleteAdapter);
                     autoCompleteAdapter.notifyDataSetChanged();
-                    populateDataOnScreen();
+                    //populateDataOnScreen();
+                    populateDefaultDataOnScreen();
                 }
                 break;
             case 2:
@@ -162,6 +234,7 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
                     APIARREsponseModel apiarrEsponseModel = new Gson().fromJson(response, APIARREsponseModel.class);
                     if (sourceDestinationList != null) {
                         System.out.println("==== API AR Response Model ===" + apiarrEsponseModel.getData().getCity());
+                        populateDataOnScreen();
                     }
                 }
                 break;
@@ -191,10 +264,41 @@ public class TripFragment extends AbstractBaseFragment implements VolleyResponse
                 break;
             case 6:
                 if (!response.equals("{}")) {
-                    A2BResponseModel a2BResponseModel = new Gson().fromJson(response, A2BResponseModel.class);
-                    if (a2BResponseModel != null) {
-                        System.out.println("==== A2B Data ===" + a2BResponseModel.getData().getDestination().getName());
+                    a2BResponseModelData = new Gson().fromJson(response, A2BResponseModel.class);
+                    routesList = a2BResponseModelData.getData().getRoutes();
+                    if (a2BResponseModelData != null) {
+                        System.out.println("==== A2B Data ===" + a2BResponseModelData.getData().getDestination().getName());
+                        populateDataOnScreen();
                     }
+
+                }
+                break;
+            case 7:
+                if (!response.equals("{}")) {
+                    sourceList = new Gson().fromJson(response, AutoCompleteCity[].class);
+                    cityList = new String[sourceList.length];
+                    for (int i = 0; i < sourceList.length; i++)
+                        cityList[i] = (sourceList[i].getText());
+                    autoCompleteAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, cityList);
+                    sourceAutoComplete.setAdapter(autoCompleteAdapter);
+                    destinationAutoComplete.setAdapter(autoCompleteAdapter);
+                    autoCompleteAdapter.notifyDataSetChanged();
+                    //populateDataOnScreen();
+                    populateDefaultDataOnScreen();
+                }
+                break;
+            case 8:
+                if (!response.equals("{}")) {
+                    destList = new Gson().fromJson(response, AutoCompleteCity[].class);
+                    destCityList = new String[destList.length];
+                    for (int i = 0; i < destList.length; i++)
+                        destCityList[i] = (destList[i].getText());
+                    autoCompleteAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, destCityList);
+                    sourceAutoComplete.setAdapter(autoCompleteAdapter);
+                    destinationAutoComplete.setAdapter(autoCompleteAdapter);
+                    autoCompleteAdapter.notifyDataSetChanged();
+                    //populateDataOnScreen();
+                    populateDefaultDataOnScreen();
                 }
                 break;
             default:

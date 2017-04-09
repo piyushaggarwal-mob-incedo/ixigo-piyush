@@ -57,7 +57,7 @@ public class UriBuilder {
                     .appendPath("city")
                     .appendPath("503b2a99e4b032e338f15201")
                     .appendPath("categories")
-                    .appendQueryParameter("apiKey", URLEncoder.encode("ixicode!2$","UTF-8"))
+                    .appendQueryParameter("apiKey", URLEncoder.encode("ixicode!2$", "UTF-8"))
                     .appendQueryParameter("type", "hotel")
                     .appendQueryParameter("skip", "1")
                     .appendQueryParameter("limit", "5");
@@ -81,7 +81,7 @@ public class UriBuilder {
                     .appendPath("brand")
                     .appendPath("inspire")
                     .appendQueryParameter("product", "1")
-                    .appendQueryParameter("apiKey","ixicode!2$");
+                    .appendQueryParameter("apiKey", "ixicode!2$");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,8 +101,8 @@ public class UriBuilder {
                     .appendPath("namedentities")
                     .appendPath("id")
                     .appendPath(entityID)
-                    .appendQueryParameter("apiKey","ixicode!2$");
-                   // .appendQueryParameter("apiKey", URLEncoder.encode("ixicode!2$","UTF-8"));
+                    .appendQueryParameter("apiKey", "ixicode!2$");
+            // .appendQueryParameter("apiKey", URLEncoder.encode("ixicode!2$","UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,9 +124,11 @@ public class UriBuilder {
                     .appendPath("v2")
                     .appendPath("a2b")
                     .appendPath("modes")
-                    .appendQueryParameter("apiKey","ixicode!2$")
-                    .appendQueryParameter("originCityId", "1065223")
-                    .appendQueryParameter("destinationCityId", "1074271");
+                    .appendQueryParameter("apiKey", "ixicode!2$")
+                    .appendQueryParameter("originCityId", originCityId)
+                    .appendQueryParameter("destinationCityId", destinationCityId);
+                    /*.appendQueryParameter("originCityId", "1065223")
+                    .appendQueryParameter("destinationCityId", "1074271");*/
         } catch (Exception e) {
             e.printStackTrace();
         }
