@@ -2,24 +2,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.piyushaggarwal.tripmonkey.home.fragments.DetailFragment">
+    tools:context="com.example.piyushaggarwal.tripmonkey.PollutionFragment">
 
-    <ImageView
-        android:id="@+id/smiley"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_above="@+id/barCode"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:src="@drawable/smiley" />
+    <Button
+        android:id="@+id/myscore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gogreen"
+        android:text="IXIGO GREEN SCORE: 30"
+        android:textColor="#fff" />
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        tools:context="com.example.piyushaggarwal.tripmonkey.MapsActivity" />
 
     <ImageView
         android:id="@+id/barCode"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/barcode" />
+        android:src="@drawable/barcode"></ImageView>
+
 
 </RelativeLayout>
+
